@@ -1,0 +1,32 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int l=0;
+        Arrays.sort(piles);
+        int high=piles[piles.length-1];
+        int ans=0;
+        while(l<=high){
+            int mid=l+(high-l)/2;
+            if(caneat(mid,piles,h)){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return ans;
+
+        
+    }
+    public static boolean caneat(int mid,int[]piles,int h){
+        int time=0;
+        for(int pile:piles){
+            time +=Math.ceil(pile/(double)mid);
+            if(time >h){
+                return false;
+        }
+        }
+     
+        return true;
+    }
+}
